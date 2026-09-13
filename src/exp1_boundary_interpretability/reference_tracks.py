@@ -1,4 +1,4 @@
-"""Construct the six reference tracks used by EXP1 and Table 1."""
+"""Construct the six linguistic and acoustic reference tracks used by EXP1."""
 from __future__ import annotations
 
 import json

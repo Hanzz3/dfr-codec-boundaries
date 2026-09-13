@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Evaluate original and algorithm-adapted decoders from identical cached codes."""
+"""Evaluate original and fine-tuned decoders from identical cached codes."""
 
 from __future__ import annotations
 

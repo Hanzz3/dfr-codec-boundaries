@@ -1,19 +1,25 @@
 # Interpreting and Evaluating Dynamic-Rate Speech Codec Boundaries
 
-Public repository: <https://github.com/WangHanZJU/dfr-codec-boundaries>
+Implementation code for boundary interpretability and reconstruction-utility
+experiments with dynamic-frame-rate speech codecs.
 
-Implementation code for the two experiments in the current manuscript:
+## Repository layout
 
-- `src/exp1_boundary_interpretability/`: reference-track construction,
-  boundary matching, DFR algorithms, and rate calibration.
-- `src/exp2_reconstruction_utility/`: decoder fine-tuning, q1/q8 reconstruction,
-  direct q1 ASR, cross-rate evaluation, and matched-rate tests.
+```text
+src/
+  exp1_boundary_interpretability/
+  exp2_reconstruction_utility/
+tests/
+environments/
+run_implementation.py
+```
 
-The repository intentionally contains no `exp3` or `exp4` directories. Those
-were server workflow names and do not correspond to the final paper. Aggregate
-results, table builders, figure builders, and figure-only data are excluded.
+The EXP1 modules construct reference tracks, evaluate boundary alignment, and
+implement dynamic-rate selectors. The EXP2 modules fine-tune and evaluate the
+decoder, run direct semantic-token ASR, evaluate multiple frame rates, and run
+matched-rate boundary tests.
 
-## Code Check
+## CPU environment and tests
 
 ```bash
 python3.13 -m venv .venv
@@ -22,32 +28,29 @@ python -m pip install -r environments/requirements-analysis.txt
 python -m pytest -q
 ```
 
-## Repository Layout
+## Entry points
 
-```text
-configs/
-  exp1_boundary_interpretability/
-  exp2_reconstruction_utility/
-src/
-  exp1_boundary_interpretability/
-  exp2_reconstruction_utility/
-tests/
-docs/
-environments/
+Use the wrapper to add the appropriate local modules to `PYTHONPATH`:
+
+```bash
+python run_implementation.py --profile exp1 \
+  src/exp1_boundary_interpretability/evaluate_boundaries.py --help
+
+python run_implementation.py --profile decoder \
+  src/exp2_reconstruction_utility/decoder_finetuning/train_shared_decoder.py --help
+
+python run_implementation.py --profile reconstruction \
+  src/exp2_reconstruction_utility/reconstruction/evaluate.py --help
+
+python run_implementation.py --profile direct-asr \
+  src/exp2_reconstruction_utility/direct_q1_asr/train.py --help
+
+python run_implementation.py --profile matched-rate \
+  src/exp2_reconstruction_utility/matched_rate/build_reference_partitions.py --help
+
+python run_implementation.py --profile matched-rate \
+  src/exp2_reconstruction_utility/matched_rate/evaluate_decoder.py --help
 ```
 
-The four configuration files are named by their role in the paper; dated
-server run names have been removed. The 3-Hz setting remains only in decoder
-fine-tuning because it was one of the decoder's training conditions. Table 3
-uses 6.25, 8.33, and 10 Hz.
-
-## Scope
-
-The retained implementation modules and CPU tests are verified from a clean
-extracted archive. Full model training and inference need separately obtained TIMIT/LibriTTS,
-pretrained models, accepted checkpoints, and GPU dependencies. No speech,
-transcripts, hypotheses, aggregate experiment results, model weights,
-credentials, or private server paths are distributed.
-
-See `docs/IMPLEMENTATION_DETAILS.md` and `docs/REPRODUCTION.md`. Model
-checkpoints are not included in this repository.
+Full training and inference require separately obtained datasets, pretrained
+models, model checkpoints, and GPU dependencies. These assets are not included.

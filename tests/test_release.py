@@ -1,5 +1,4 @@
 import ast
-import json
 from pathlib import Path
 import sys
 
@@ -100,21 +99,7 @@ def test_direct_q1_asr_defaults_cover_nine_algorithms():
     assert systems[-2:] == ("atome_style", "tadpc_style")
 
 
-def test_configs_follow_paper_experiment_layout():
-    configs = sorted((ROOT / "configs").glob("*/*.json"))
-    assert [path.parent.name for path in configs] == [
-        "exp1_boundary_interpretability",
-        "exp2_reconstruction_utility",
-        "exp2_reconstruction_utility",
-        "exp2_reconstruction_utility",
-    ]
-    payloads = [json.loads(path.read_text()) for path in configs]
-    assert all(payload["paper_experiment"].startswith(("EXP1:", "EXP2:")) for payload in payloads)
-    cross_rate = json.loads((ROOT / "configs/exp2_reconstruction_utility/cross_rate_evaluation.json").read_text())
-    assert cross_rate["rates_hz"] == [6.25, 8.33, 10.0]
-
-
-def test_release_is_code_only():
+def test_repository_excludes_generated_artifacts():
     assert not any((ROOT / name).exists() for name in ("data", "results", "tables", "figures"))
     names = [path.relative_to(ROOT).as_posix().lower() for path in ROOT.rglob("*")]
     assert all("/exp3" not in f"/{name}" and "/exp4" not in f"/{name}" for name in names)

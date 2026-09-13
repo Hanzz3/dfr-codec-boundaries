@@ -30,7 +30,7 @@ SYSTEMS = (
     "tadpc_style",
 )
 CHECKPOINT_FORMAT = "direct_q1_asr_probe_v1"
-# Accepted checkpoints made before the paper experiment names were simplified.
+# Backward-compatible names used by earlier checkpoints.
 SUPPORTED_CHECKPOINT_FORMATS = {CHECKPOINT_FORMAT, "exp3_lm_asr_probe_v1"}
 PROMPT_BEFORE = "Transcribe the following speech into English.\nAudio:"
 PROMPT_AFTER = "\nTranscript:"

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run a retained EXP1/EXP2 implementation file with its local dependencies."""
+"""Run an EXP1/EXP2 implementation file with its local dependencies."""
 from __future__ import annotations
 
 import argparse
@@ -28,7 +28,7 @@ parser.add_argument("args", nargs=argparse.REMAINDER)
 args = parser.parse_args()
 script = (ROOT / args.script).resolve()
 if not script.is_relative_to(ROOT / "src") or not script.is_file():
-    parser.error("script must be a retained Python file under src/")
+    parser.error("script must be a Python file under src/")
 environment = os.environ.copy()
 environment["PYTHONPATH"] = os.pathsep.join(str(path) for path in PROFILES[args.profile])
 raise SystemExit(subprocess.call([sys.executable, str(script), *args.args], cwd=ROOT, env=environment))
