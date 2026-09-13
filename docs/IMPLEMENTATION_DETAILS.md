@@ -70,7 +70,7 @@ The cross-rate evaluation runs the nine algorithms separately at 6.25, 8.33,
 and 10 Hz. The resulting boundary and reconstruction summaries support the
 syllable/phoneme Spearman analysis reported in Table 3.
 
-Tables 4 and 5 use the original frozen decoder, unlike Tables 2 and 3. Table 4
+Tables 4 and 5 use the same shared fine-tuned decoder as Tables 2 and 3. Table 4
 tests phoneme-derived partitions near 8.06 Hz. Table 5 tests syllable-derived
 partitions near 4.47 Hz. Its CodecSlime result is 1,641/14,552 = 11.2768%,
 displayed as 11.28%. CodecSlime has 23,215 segments versus 22,875 for the other

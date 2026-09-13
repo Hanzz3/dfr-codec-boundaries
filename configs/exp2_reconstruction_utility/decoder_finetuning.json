@@ -1,6 +1,6 @@
 {
   "paper_experiment": "EXP2: Boundary Reconstruction Utility",
-  "purpose": "Shared decoder fine-tuning for Tables 2 and 3",
+  "purpose": "Shared decoder fine-tuning for Tables 2 through 5",
   "training_data": "LibriTTS train-clean-100",
   "conditions": "nine algorithms x four rates",
   "training_rates_hz": [3.0, 6.25, 8.33, 10.0],
