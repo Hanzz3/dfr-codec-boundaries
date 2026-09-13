@@ -1,0 +1,8 @@
+# CPU analysis/synthetic-test environment verified during packaging, not training.
+numpy==2.5.3
+scipy==1.18.1
+pandas==3.0.5
+matplotlib==3.11.2
+librosa==1.0.0
+scikit-learn==1.9.1
+pytest==9.1.1

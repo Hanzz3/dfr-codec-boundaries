@@ -1,0 +1,33 @@
+{
+  "paper_experiment": "EXP2: Boundary Reconstruction Utility",
+  "paper_results": ["Table 2", "Table 3"],
+  "dataset": "TIMIT TEST",
+  "utterances_per_algorithm": 1680,
+  "rates_hz": [6.25, 8.33, 10.0],
+  "algorithms": ["Uniform", "Similarity", "CodecSlime", "PLE", "Elastic-G", "Elastic-DP", "DC-DiT", "A-ToMe", "TADPC"],
+  "q1_q8_share_boundary_spans": true,
+  "boundary_tolerance_ms": 40,
+  "wer_aggregation": "corpus",
+  "spearman_population": "nine algorithms independently at each rate",
+  "reported_spearman": "absolute rho in the paper; retain signed rho when assembling the analysis",
+  "held_out_rate_calibration": {
+    "6.25": {
+      "atome": {"merge_ratios": [0.5], "observed_test_rate_hz": 6.276494384890681},
+      "tadpc": {"threshold": 0.8561496734619141, "k": 10, "beta": 0.2, "observed_test_rate_hz": 6.199180560219636}
+    },
+    "8.33": {
+      "atome": {"merge_ratios": [0.3397], "calibration_rate_hz": 8.331398959829858},
+      "tadpc": {"threshold": 0.912384033203125, "k": 10, "beta": 0.2, "calibration_rate_hz": 8.329985180946467}
+    },
+    "10.0": {
+      "atome": {"merge_ratios": [0.2059], "calibration_rate_hz": 9.9961235950241},
+      "tadpc": {"threshold": 0.9420509338378906, "k": 10, "beta": 0.2, "calibration_rate_hz": 9.99965804223258}
+    }
+  },
+  "calibration_provenance_sha256": {
+    "atome_8.33": "b56a5e7c30b7b0bc6f99efde171e1e834059ae1a6217302b9092e80b9bef5729",
+    "tadpc_8.33": "f8393dfd27575d63fe9f04d6f04ab2ec30274849e8607dfb86a16f8082122f32",
+    "atome_10.0": "86aca515c733876a4ff3c70ae500de1039d83d5aae49cc07fa88f50fb8024a90",
+    "tadpc_10.0": "1e98f7863a22bf9c0d7516f5cd76074099c9b1bb4763d8476dadd7f63b9c86c8"
+  }
+}
