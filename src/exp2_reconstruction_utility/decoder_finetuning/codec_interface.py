@@ -23,18 +23,9 @@ from audiotools import AudioSignal
 from dac.model import Discriminator
 from dac.nn.loss import GANLoss, MelSpectrogramLoss
 
+from paper_protocol import DECODER_TRAINING_SYSTEMS
 
-SYSTEMS = (
-    "uniform",
-    "flexicodec_threshold",
-    "codecslime_dp",
-    "ple",
-    "elastic_time_greedy",
-    "elastic_time_dp",
-    "dcdit_1d",
-    "atome_style",
-    "tadpc_style",
-)
+SYSTEMS = DECODER_TRAINING_SYSTEMS
 DYNAMIC_SYSTEMS = ("atome_style", "tadpc_style")
 TRAINABLE_PREFIXES = ("convnext_decoder.", "bottleneck_transformer.", "dac.decoder.")
 

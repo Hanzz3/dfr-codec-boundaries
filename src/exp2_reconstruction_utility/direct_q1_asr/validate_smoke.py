@@ -12,18 +12,9 @@ from pathlib import Path
 
 import numpy as np
 
+from paper_protocol import PAPER_SYSTEMS
 
-SYSTEMS = {
-    "uniform",
-    "flexicodec_threshold",
-    "codecslime_dp",
-    "ple",
-    "elastic_time_greedy",
-    "elastic_time_dp",
-    "dcdit_1d",
-    "atome_style",
-    "tadpc_style",
-}
+SYSTEMS = frozenset(PAPER_SYSTEMS)
 
 
 def atomic_text(path: Path, value: str) -> None:
@@ -91,7 +82,7 @@ def main() -> int:
 
     report = {
         "status": "passed",
-        "protocol": "timit_current_nine_direct_q1_sem_smoke_v1",
+        "protocol": "timit_paper_seven_direct_q1_sem_smoke_v1",
         "utterances": args.utterances,
         "records": expected,
         "feature_dim": 512,

@@ -1,4 +1,3 @@
-import ast
 from pathlib import Path
 import sys
 
@@ -15,7 +14,9 @@ for path in (EXP1, ALGORITHMS, RECONSTRUCTION):
 
 import boundary_metrics
 import reference_tracks
+from entropy_mass import equal_entropy_starts, waveform_frame_entropy
 from metrics import feature_nmse
+from paper_protocol import DECODER_TRAINING_SYSTEMS, PAPER_SYSTEMS, PAPER_SYSTEM_LABELS
 from supplement_selectors import atome_style_starts, tadpc_style_starts
 
 
@@ -86,17 +87,37 @@ def test_atome_and_tadpc_return_valid_partitions():
         assert result.starts[-1] < len(features)
 
 
-def test_direct_q1_asr_defaults_cover_nine_algorithms():
-    source = (ROOT / "src/exp2_reconstruction_utility/direct_q1_asr/core.py").read_text()
-    module = ast.parse(source)
-    assignment = next(
-        node for node in module.body
-        if isinstance(node, ast.Assign)
-        and any(isinstance(target, ast.Name) and target.id == "SYSTEMS" for target in node.targets)
+def test_final_paper_systems_match_the_manuscript():
+    assert len(PAPER_SYSTEMS) == 7
+    assert PAPER_SYSTEMS[0] == "uniform"
+    assert PAPER_SYSTEM_LABELS["tfc_style_entropy"] == "Entropy-Mass"
+    assert set(PAPER_SYSTEM_LABELS) == set(PAPER_SYSTEMS)
+
+
+def test_decoder_training_provenance_remains_explicit():
+    assert len(DECODER_TRAINING_SYSTEMS) == 9
+    assert "tfc_style_entropy" not in DECODER_TRAINING_SYSTEMS
+    assert {"elastic_time_greedy", "elastic_time_dp", "dcdit_1d"}.issubset(
+        DECODER_TRAINING_SYSTEMS
     )
-    systems = ast.literal_eval(assignment.value)
-    assert len(systems) == 9
-    assert systems[-2:] == ("atome_style", "tadpc_style")
+
+
+def test_entropy_mass_exact_budget_partition():
+    starts = equal_entropy_starts(np.ones(12), segments=3, max_span=4)
+    assert starts == [0, 4, 8]
+    lengths = np.diff([*starts, 12])
+    assert len(starts) == 3
+    assert max(lengths) <= 4
+
+
+def test_waveform_frame_entropy_is_finite():
+    sample_rate = 16000
+    waveform = np.sin(2 * np.pi * 220 * np.arange(sample_rate) / sample_rate)
+    times = (np.arange(12, dtype=np.float64) + 0.5) / 12
+    entropy = waveform_frame_entropy(waveform, sample_rate, times, 1.0)
+    assert entropy.shape == (12,)
+    assert np.isfinite(entropy).all()
+    assert (entropy > 0).all()
 
 
 def test_repository_excludes_generated_artifacts():

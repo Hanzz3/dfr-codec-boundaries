@@ -17,18 +17,9 @@ import torch
 from torch import nn
 from torch.utils.data import Dataset, Sampler
 
+from paper_protocol import PAPER_SYSTEMS
 
-SYSTEMS = (
-    "uniform",
-    "flexicodec_threshold",
-    "codecslime_dp",
-    "ple",
-    "elastic_time_greedy",
-    "elastic_time_dp",
-    "dcdit_1d",
-    "atome_style",
-    "tadpc_style",
-)
+SYSTEMS = PAPER_SYSTEMS
 CHECKPOINT_FORMAT = "direct_q1_asr_probe_v1"
 # Backward-compatible names used by earlier checkpoints.
 SUPPORTED_CHECKPOINT_FORMATS = {CHECKPOINT_FORMAT, "exp3_lm_asr_probe_v1"}

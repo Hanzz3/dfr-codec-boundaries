@@ -93,7 +93,7 @@ def main() -> int:
     minimum_pesq = min(row["pesq_valid_fraction"] for row in summaries)
     acceptance = {
         "status": "passed" if minimum_pesq >= 0.95 else "failed",
-        "protocol": "current_nine_tuned_decoder_five_metrics_timit_v1",
+        "protocol": "paper_seven_tuned_decoder_five_metrics_timit_v1",
         "decoder_step": args.expected_step,
         "systems": list(SYSTEMS),
         "utterances": len(utterances),

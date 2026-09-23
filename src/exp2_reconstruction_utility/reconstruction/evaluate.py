@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Evaluate a tuned decoder on the frozen current-nine TIMIT boundaries."""
+"""Evaluate the tuned decoder on the final seven TIMIT boundary methods."""
 
 from __future__ import annotations
 

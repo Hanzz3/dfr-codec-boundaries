@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Materialize the nine DFR algorithms at one target rate."""
+"""Materialize the archived nine-method bundle used before final filtering."""
 
 from __future__ import annotations
 

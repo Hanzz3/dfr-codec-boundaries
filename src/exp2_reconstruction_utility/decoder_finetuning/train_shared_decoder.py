@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Train the current-nine decoder with the accepted formal_v2 GAN protocol."""
+"""Train the decoder with the historical nine-allocation GAN protocol."""
 
 from __future__ import annotations
 
@@ -34,6 +34,7 @@ from codec_interface import (
     normalize_waveform,
     scheduled_systems,
 )
+from paper_protocol import DECODER_TRAINING_RATES_HZ
 
 
 def atomic_text(value: str, path: Path) -> None:
@@ -73,7 +74,7 @@ def resolve_audio(row: dict, audio_root: Path) -> Path:
 def rate_tag(rate: float) -> str:
     return f"{rate:g}".replace(".", "p")
 
-RATES = (3.0, 6.25, 8.33, 10.0)
+RATES = DECODER_TRAINING_RATES_HZ
 CONDITIONS = tuple(f"{system}@{rate_tag(rate)}hz" for rate in RATES for system in SYSTEMS)
 
 def scheduled_conditions(seed: int, max_steps: int, batch_size: int) -> list[str]:

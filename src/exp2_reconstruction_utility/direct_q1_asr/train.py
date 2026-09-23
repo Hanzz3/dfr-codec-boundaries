@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Train the shared nine-algorithm Qwen2.5-0.5B direct q1 ASR probe."""
+"""Train the shared Qwen2.5-0.5B direct q1 ASR probe."""
 
 from __future__ import annotations
 
@@ -16,7 +16,6 @@ from torch.utils.data import DataLoader
 
 from core import (
     ASRManifestDataset,
-    SYSTEMS,
     SUPPORTED_CHECKPOINT_FORMATS,
     BalancedSystemBatchSampler,
     build_probe,

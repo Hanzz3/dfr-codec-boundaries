@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Materialize nine selector boundaries for four rates on LibriTTS features."""
+"""Materialize the historical decoder-training mixture on LibriTTS."""
 from __future__ import annotations
 
 import argparse, json, math, os
@@ -12,11 +12,10 @@ from followup_selectors import physical_max_span, requested_segments, select_bas
 from trained_selectors import load_trained_artifacts, normalize_features, select_trained
 from common_selectors import cosine_change, threshold_starts
 from supplement_selectors import atome_style_starts, tadpc_style_starts
+from paper_protocol import DECODER_TRAINING_RATES_HZ, DECODER_TRAINING_SYSTEMS
 
-SYSTEMS = ("uniform", "flexicodec_threshold", "codecslime_dp", "ple",
-           "elastic_time_greedy", "elastic_time_dp", "dcdit_1d",
-           "atome_style", "tadpc_style")
-RATES = (3.0, 6.25, 8.33, 10.0)
+SYSTEMS = DECODER_TRAINING_SYSTEMS
+RATES = DECODER_TRAINING_RATES_HZ
 
 def rows(path: Path):
     with path.open(encoding="utf-8") as h:

@@ -13,18 +13,9 @@ import re
 from collections import Counter
 from pathlib import Path
 
+from paper_protocol import PAPER_SYSTEMS
 
-SYSTEMS = (
-    "uniform",
-    "flexicodec_threshold",
-    "codecslime_dp",
-    "ple",
-    "elastic_time_greedy",
-    "elastic_time_dp",
-    "dcdit_1d",
-    "atome_style",
-    "tadpc_style",
-)
+SYSTEMS = PAPER_SYSTEMS
 
 
 def read_jsonl(path: Path):
@@ -147,7 +138,7 @@ def main() -> int:
     atomic_text(args.output_dir / f"summary_{args.arm}.json", json.dumps(summary, indent=2) + "\n")
     acceptance = {
         "status": "passed",
-        "protocol": f"timit_codec_grid_crossrate_frozen_flexicodec_{args.arm}_v2",
+        "protocol": f"paper_seven_crossrate_frozen_flexicodec_{args.arm}_v1",
         "arm": args.arm,
         "num_quantizers": 1 if args.arm == "q1" else 8,
         "target_rate_hz": args.target_rate_hz,

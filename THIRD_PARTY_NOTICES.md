@@ -5,9 +5,13 @@ not grant rights to third-party code, models, or datasets. Preserve all
 applicable upstream licenses and notices.
 
 The allocation rules correspond to FlexiCodec, CodecSlime, DTM-Codec/PLE,
-ElasticTime, DC-DiT, A-ToMe and VARSTok/TADPC. They are controlled adapters,
-not a claim of ownership of the original methods. Bibliographic references
-are provided in the accompanying manuscript.
+TFC/Entropy-Mass, ElasticTime, DC-DiT, A-ToMe and VARSTok/TADPC. They are
+controlled adapters, not a claim of ownership of the original methods.
+Bibliographic references are provided in the accompanying manuscript.
+
+The Entropy-Mass adapter uses waveform soft-histogram entropy and an
+exact-budget equal-entropy-mass partition. It is inspired by TFC's temporal
+entropy criterion but does not reproduce TFC's learned multi-resolution codec.
 
 The TADPC adapter follows the corrected SequentialDPClusteringFixed equations
 from QwenAudio/FunResearch commit

@@ -8,18 +8,9 @@ from pathlib import Path
 
 import numpy as np
 
+from paper_protocol import PAPER_SYSTEMS
 
-SYSTEMS = (
-    "uniform",
-    "flexicodec_threshold",
-    "codecslime_dp",
-    "ple",
-    "elastic_time_greedy",
-    "elastic_time_dp",
-    "dcdit_1d",
-    "atome_style",
-    "tadpc_style",
-)
+SYSTEMS = PAPER_SYSTEMS
 TARGETS = (
     "phoneme",
     "syllable",
@@ -157,9 +148,7 @@ def implementation(system: str) -> str:
         "flexicodec_threshold": "flexicodec_threshold_codec_grid_v1",
         "codecslime_dp": "codecslime_dp_codec_grid_v1",
         "ple": "ple_codec_grid_v1",
-        "elastic_time_greedy": "elastic_time_right_expansion_greedy_v2",
-        "elastic_time_dp": "elastic_time_dynamic_programming_v2",
-        "dcdit_1d": "dcdit_1d_v2",
+        "tfc_style_entropy": "tfc_style_waveform_entropy_equal_mass_dp_v1",
         "atome_style": "atome_adjacent_path_matching_fixed_ratio_codec_grid_v1",
         "tadpc_style": "varstok_sequential_dpc_fixed_global_threshold_codec_grid_v1",
     }

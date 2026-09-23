@@ -93,7 +93,7 @@ def main() -> int:
     if checkpoint.get("format") not in SUPPORTED_CHECKPOINT_FORMATS:
         raise RuntimeError("invalid LM-ASR checkpoint")
     config = checkpoint["config"]
-    systems = tuple(args.system or config.get("systems") or SYSTEMS)
+    systems = tuple(args.system or SYSTEMS)
     if len(systems) != len(set(systems)):
         raise RuntimeError(f"duplicate systems: {systems}")
     probe, tokenizer = build_probe(

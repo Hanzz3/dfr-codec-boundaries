@@ -17,18 +17,9 @@ import numpy as np
 import soundfile as sf
 import torch
 
+from paper_protocol import PAPER_SYSTEMS
 
-SYSTEMS = (
-    "uniform",
-    "flexicodec_threshold",
-    "codecslime_dp",
-    "ple",
-    "elastic_time_greedy",
-    "elastic_time_dp",
-    "dcdit_1d",
-    "atome_style",
-    "tadpc_style",
-)
+SYSTEMS = PAPER_SYSTEMS
 
 
 def read_jsonl(path: Path):
@@ -136,7 +127,7 @@ def main() -> int:
     predictions = {(row["utt_id"], row["system"]): row for row in read_jsonl(args.predictions)}
     expected_keys = {(row["utt_id"], system) for row in records for system in SYSTEMS}
     if set(predictions) != expected_keys:
-        raise RuntimeError("current-nine prediction key coverage mismatch")
+        raise RuntimeError("final paper prediction key coverage mismatch")
     ground_truth = {row["utt_id"]: row for row in read_jsonl(args.reference_tracks)}
 
     device = torch.device(args.device)
@@ -241,7 +232,7 @@ def main() -> int:
     atomic_text(manifest, "".join(json.dumps(row, sort_keys=True) + "\n" for row in manifest_rows))
     acceptance = {
         "status": "passed",
-        "protocol": "timit_current_nine_q1_semantic_component_from_shared_q8_encode_v1",
+        "protocol": "timit_paper_seven_q1_semantic_component_from_shared_q8_encode_v1",
         "shard_index": args.shard_index,
         "num_shards": args.num_shards,
         "utterances": len(selected),

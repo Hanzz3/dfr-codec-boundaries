@@ -9,18 +9,9 @@ import os
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from paper_protocol import PAPER_SYSTEMS
 
-SYSTEMS = (
-    "uniform",
-    "flexicodec_threshold",
-    "codecslime_dp",
-    "ple",
-    "elastic_time_greedy",
-    "elastic_time_dp",
-    "dcdit_1d",
-    "atome_style",
-    "tadpc_style",
-)
+SYSTEMS = PAPER_SYSTEMS
 
 
 def atomic_text(path: Path, value: str) -> None:
@@ -62,7 +53,7 @@ def main() -> int:
             row["utterance_wer"] = row["errors"] / max(int(row["reference_words"]), 1)
         summary.append(
             {
-                "system": "similarity" if system == "flexicodec_threshold" else system,
+                "system": system,
                 "utterances": len(subset),
                 "mean_utterance_wer": sum(row["utterance_wer"] for row in subset) / len(subset),
                 "corpus_wer": sum(row["errors"] for row in subset)
@@ -77,7 +68,7 @@ def main() -> int:
     )
     report = {
         "status": "passed",
-        "protocol": "timit_current_nine_direct_q1_sem_full960h_qwen_v1",
+        "protocol": "timit_paper_seven_direct_q1_sem_full960h_qwen_v1",
         "checkpoint_sha256": args.checkpoint_sha256,
         "checkpoint_selection": "LibriTTS_dev_only",
         "test_selection": "forbidden",
